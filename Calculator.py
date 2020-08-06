@@ -1,81 +1,105 @@
 from appJar import gui
 
-numberstore = ""
+number_store = ""
+
 
 # Result of button pressed
 def press(btn):
     btn = float(btn)
+    calc.setFg("Black", override=False)
     if (btn - int(btn)) == 0:
         calc.setLabel("Screen", int(btn))
         press.button = int(btn)
         calc.setLabel("Screen", int(press.button))
-        global numberstore
-        numberstore = int(str(numberstore) + str(press.button))
-        press.button = numberstore
+        global number_store
+        number_store = int(str(number_store) + str(press.button))
+        press.button = number_store
         calc.setLabel("Screen", press.button)
     else:
         calc.setLabel("Screen", float(btn))
         press.button = float(btn)
         calc.setLabel("Screen", float(press.button))
-        numberstore = float(str(numberstore) + str(press.button))
-        press.button = numberstore
+        number_store = float(str(number_store) + str(press.button))
+        press.button = number_store
         calc.setLabel("Screen", press.button)
+
 
 # Result of operation button being pressed
 def op(sign):
+    calc.setFg("Black", override=False)
     calc.setLabel("Screen", sign)
     op.operation = sign
-    global numberstore
-    numberstore = ""
+    global number_store
+    number_store = ""
     if op.operation != "x^2":
         num1 = press.button
         store1(num1)
 
+
 # Result of equals being pressed
-def pressLast(equal):
+def press_last():
     try:
         op.operation
     except AttributeError:
-        calc.setLabel("Screen", "Error: Please enter a valid operation \nSelect 'Clear' to continue")
-        calc.setFg("Red", "Screen")
-    num2 = int(press.button)
+        calc.setLabel("Screen", "Error: Please enter a valid operation")
+        calc.setFg("Red", override=False)
+    try:
+        press.button
+    except AttributeError:
+        calc.setLabel("Screen", "Error: Please enter some valid numbers")
+        calc.setFg("Red", override=False)
+    press_last.num2 = float(press.button)
+    try:
+        store1.num1
+    except AttributeError:
+        calc.setLabel("Screen", "Error: Please enter some valid numbers")
+        calc.setFg("Red", override=False)
+    press_last.num2 = float(press.button)
     if op.operation == "x^2":
-        op.result = num2 * num2
+        press_last.num2 = float(press_last.num2)
+        op.result = float(press_last.num2 * press_last.num2)
     else:
-        global numberstore
-        numberstore = ""
+        global number_store
+        number_store = ""
         if op.operation == "+":
             num1 = float(store1.num1)
-            op.result = float(num1 + num2)
+            op.result = float(num1 + press_last.num2)
         elif op.operation == "-":
             num1 = float(store1.num1)
-            op.result = float(num1 - num2)
+            op.result = float(num1 - press_last.num2)
         elif op.operation == "X":
             num1 = float(store1.num1)
-            op.result = float(num1 * num2)
+            op.result = float(num1 * press_last.num2)
         elif op.operation == "/":
             num1 = float(store1.num1)
-            op.result = float(num1 / num2)
+            op.result = float(num1 / press_last.num2)
         else:
             pass
     press(float(op.result))
+
 
 # Store of button presses
 def store1(num1):
     store1.num1 = float(num1)
 
+
 # Result of "clear" being pressed
-def clear(btn):
+def clear():
     calc.setLabel("Screen", "")
-    calc.setFg("Black", "Screen")
-    global numberstore
-    numberstore = ""
+    calc.setFg("Black", override=False)
+    global number_store
+    number_store = ""
     store1.num1 = ""
     op.operation = ""
     op.result = ""
+    press_last.num2 = ""
+    press.button = ""
+    del press_last.num2
+    del press.button
     del store1.num1
     del op.operation
     del op.result
+
 
 # Calculator Layout
 calc = gui("Calculator", "300x450")
@@ -99,11 +123,11 @@ calc.addButton("9", press, 4, 2)
 calc.addButton("0", press, 5, 1)
 calc.addButton("+", op, 1, 3)
 calc.addButton("-", op, 2, 3)
-calc.addButton("/", op, 3,3)
+calc.addButton("/", op, 3, 3)
 calc.addButton("x^2", op, 5, 3)
 calc.addButton("X", op, 4, 3)
 calc.addButton("Clear", clear, 1, 0, 3)
-calc.addButton("=", pressLast, 6, 0, 4)
+calc.addButton("=", press_last, 6, 0, 4)
 
 # Button Colours
 calc.setButtonBg("0", "PaleTurquoise")
