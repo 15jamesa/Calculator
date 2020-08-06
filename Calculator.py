@@ -72,7 +72,11 @@ def press_last():
             op.result = float(num1 * press_last.num2)
         elif op.operation == "/":
             num1 = float(store1.num1)
-            op.result = float(num1 / press_last.num2)
+            if press_last.num2 == 0:
+                calc.setLabel("Screen", "Error: You cannot divide a number by zero")
+                calc.setFg("Red", override=False)
+            else:
+                op.result = float(num1 / press_last.num2)
         else:
             pass
     press(float(op.result))
