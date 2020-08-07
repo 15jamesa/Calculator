@@ -41,18 +41,18 @@ def press_last():
     try:
         op.operation
     except AttributeError:
-        calc.setLabel("Screen", "Error: Please enter a valid operation")
+        calc.setLabel("Screen", "Error: Please enter a valid Calculation")
         calc.setFg("Red", override=False)
     try:
         press.button
     except AttributeError:
-        calc.setLabel("Screen", "Error: Please enter some valid numbers")
+        calc.setLabel("Screen", "Error: Please enter a valid Calculation")
         calc.setFg("Red", override=False)
     press_last.num2 = float(press.button)
     try:
         store1.num1
     except AttributeError:
-        calc.setLabel("Screen", "Error: Please enter some valid numbers")
+        calc.setLabel("Screen", "Error: Please enter a valid Calculation")
         calc.setFg("Red", override=False)
     press_last.num2 = float(press.button)
     if op.operation == "x^2":
