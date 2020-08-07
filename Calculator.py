@@ -120,6 +120,9 @@ calc.setSticky("nesw")
 # Calculator Screen
 calc.addLabel("Screen", "", 0, 0, 4, 1)
 calc.setLabelBg("Screen", "white")
+calc.addButton("", press , 5, 0)
+calc.setButtonBg("", "PaleTurquoise")
+calc.setButtonState("", "disabled")
 
 # Calculator Buttons
 calc.addButton("1", press, 2, 0)
@@ -158,7 +161,7 @@ calc.setButtonBg("x^2", "LightSkyBlue")
 calc.setButtonBg("/", "LightSkyBlue")
 calc.setButtonBg("X", "LightSkyBlue")
 calc.setButtonBg("=", "CornflowerBlue")
-calc.setButtonBg(".", "LightSkyBlue")
+calc.setButtonBg(".", "PaleTurquoise")
 calc.setButtonBg("Clear", "LightBlue")
 
 calc.go()
