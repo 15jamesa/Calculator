@@ -2,7 +2,6 @@ from appJar import gui
 
 number_store = ""
 
-
 # Result of button pressed
 def press(btn):
     btn = float(btn)
