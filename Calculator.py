@@ -2,25 +2,34 @@ from appJar import gui
 
 number_store = ""
 
+
 # Result of button pressed
 def press(btn):
-    btn = float(btn)
-    calc.setFg("Black", override=False)
-    if (btn - int(btn)) == 0:
-        calc.setLabel("Screen", int(btn))
-        press.button = int(btn)
-        calc.setLabel("Screen", int(press.button))
+    if btn == ".":
+        calc.setLabel("Screen", (btn))
+        press.button = btn
+        calc.setLabel("Screen", press.button)
         global number_store
-        number_store = int(str(number_store) + str(press.button))
+        number_store = (str(number_store) + str(press.button))
         press.button = number_store
         calc.setLabel("Screen", press.button)
     else:
-        calc.setLabel("Screen", float(btn))
-        press.button = float(btn)
-        calc.setLabel("Screen", float(press.button))
-        number_store = float(str(number_store) + str(press.button))
-        press.button = number_store
-        calc.setLabel("Screen", press.button)
+        btn = float(btn)
+        calc.setFg("Black", override=False)
+        if (btn - int(btn)) == 0:
+            calc.setLabel("Screen", int(btn))
+            press.button = int(btn)
+            calc.setLabel("Screen", int(press.button))
+            number_store = (str(number_store) + str(press.button))
+            press.button = number_store
+            calc.setLabel("Screen", press.button)
+        else:
+            calc.setLabel("Screen", float(btn))
+            press.button = float(btn)
+            calc.setLabel("Screen", float(press.button))
+            number_store = (str(number_store) + str(press.button))
+            press.button = number_store
+            calc.setLabel("Screen", press.button)
 
 
 # Result of operation button being pressed
@@ -81,8 +90,13 @@ def press_last():
     press(float(op.result))
 
 
-# Store of button presses
 def store1(num1):
+    """Store of button presses
+    Parameters
+    ----------
+    num1 : float
+        blah
+    """
     store1.num1 = float(num1)
 
 
@@ -104,6 +118,11 @@ def clear():
     del op.result
 
 
+# Empty function
+def blank():
+    pass
+
+
 # Calculator Layout
 calc = gui("Calculator", "300x450")
 calc.setStretch("both")
@@ -112,6 +131,9 @@ calc.setSticky("nesw")
 # Calculator Screen
 calc.addLabel("Screen", "", 0, 0, 4, 1)
 calc.setLabelBg("Screen", "white")
+calc.addButton("", blank, 5, 0)
+calc.setButtonBg("", "PaleTurquoise")
+calc.setButtonState("", "disabled")
 
 # Calculator Buttons
 calc.addButton("1", press, 2, 0)
@@ -129,6 +151,7 @@ calc.addButton("-", op, 2, 3)
 calc.addButton("/", op, 3, 3)
 calc.addButton("x^2", op, 5, 3)
 calc.addButton("X", op, 4, 3)
+calc.addButton(".", press, 5, 2, )
 calc.addButton("Clear", clear, 1, 0, 3)
 calc.addButton("=", press_last, 6, 0, 4)
 
@@ -149,6 +172,7 @@ calc.setButtonBg("x^2", "LightSkyBlue")
 calc.setButtonBg("/", "LightSkyBlue")
 calc.setButtonBg("X", "LightSkyBlue")
 calc.setButtonBg("=", "CornflowerBlue")
+calc.setButtonBg(".", "PaleTurquoise")
 calc.setButtonBg("Clear", "LightBlue")
 
 calc.go()
