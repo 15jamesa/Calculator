@@ -112,6 +112,11 @@ def clear():
     del op.result
 
 
+#Empty function
+def blank():
+    pass
+
+
 # Calculator Layout
 calc = gui("Calculator", "300x450")
 calc.setStretch("both")
@@ -120,7 +125,7 @@ calc.setSticky("nesw")
 # Calculator Screen
 calc.addLabel("Screen", "", 0, 0, 4, 1)
 calc.setLabelBg("Screen", "white")
-calc.addButton("", press , 5, 0)
+calc.addButton("", blank, 5, 0)
 calc.setButtonBg("", "PaleTurquoise")
 calc.setButtonState("", "disabled")
 
