@@ -2,6 +2,7 @@ from appJar import gui
 
 number_store = ""
 
+
 # Result of button pressed
 def press(btn):
     if btn == ".":
@@ -89,8 +90,13 @@ def press_last():
     press(float(op.result))
 
 
-# Store of button presses
 def store1(num1):
+    """Store of button presses
+    Parameters
+    ----------
+    num1 : float
+        blah
+    """
     store1.num1 = float(num1)
 
 
@@ -112,7 +118,7 @@ def clear():
     del op.result
 
 
-#Empty function
+# Empty function
 def blank():
     pass
 
@@ -145,7 +151,7 @@ calc.addButton("-", op, 2, 3)
 calc.addButton("/", op, 3, 3)
 calc.addButton("x^2", op, 5, 3)
 calc.addButton("X", op, 4, 3)
-calc.addButton(".", press, 5, 2,)
+calc.addButton(".", press, 5, 2, )
 calc.addButton("Clear", clear, 1, 0, 3)
 calc.addButton("=", press_last, 6, 0, 4)
 
