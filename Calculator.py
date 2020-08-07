@@ -4,23 +4,31 @@ number_store = ""
 
 # Result of button pressed
 def press(btn):
-    btn = float(btn)
-    calc.setFg("Black", override=False)
-    if (btn - int(btn)) == 0:
-        calc.setLabel("Screen", int(btn))
-        press.button = int(btn)
-        calc.setLabel("Screen", int(press.button))
+    if btn == ".":
+        calc.setLabel("Screen", (btn))
+        press.button = btn
+        calc.setLabel("Screen", press.button)
         global number_store
-        number_store = int(str(number_store) + str(press.button))
+        number_store = (str(number_store) + str(press.button))
         press.button = number_store
         calc.setLabel("Screen", press.button)
     else:
-        calc.setLabel("Screen", float(btn))
-        press.button = float(btn)
-        calc.setLabel("Screen", float(press.button))
-        number_store = float(str(number_store) + str(press.button))
-        press.button = number_store
-        calc.setLabel("Screen", press.button)
+        btn = float(btn)
+        calc.setFg("Black", override=False)
+        if (btn - int(btn)) == 0:
+            calc.setLabel("Screen", int(btn))
+            press.button = int(btn)
+            calc.setLabel("Screen", int(press.button))
+            number_store = (str(number_store) + str(press.button))
+            press.button = number_store
+            calc.setLabel("Screen", press.button)
+        else:
+            calc.setLabel("Screen", float(btn))
+            press.button = float(btn)
+            calc.setLabel("Screen", float(press.button))
+            number_store = (str(number_store) + str(press.button))
+            press.button = number_store
+            calc.setLabel("Screen", press.button)
 
 
 # Result of operation button being pressed
@@ -129,6 +137,7 @@ calc.addButton("-", op, 2, 3)
 calc.addButton("/", op, 3, 3)
 calc.addButton("x^2", op, 5, 3)
 calc.addButton("X", op, 4, 3)
+calc.addButton(".", press, 5, 2,)
 calc.addButton("Clear", clear, 1, 0, 3)
 calc.addButton("=", press_last, 6, 0, 4)
 
@@ -149,6 +158,7 @@ calc.setButtonBg("x^2", "LightSkyBlue")
 calc.setButtonBg("/", "LightSkyBlue")
 calc.setButtonBg("X", "LightSkyBlue")
 calc.setButtonBg("=", "CornflowerBlue")
+calc.setButtonBg(".", "LightSkyBlue")
 calc.setButtonBg("Clear", "LightBlue")
 
 calc.go()
